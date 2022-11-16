@@ -2,7 +2,7 @@ name: Investment App CI/CD
 on:
   push:
     branches:
-      - master
+      - main
 jobs:
   flutter_test:
     name: Run FLutter test and analyze codebase
@@ -14,12 +14,10 @@ jobs:
           java-version: '12.x'
       - uses: subosito/flutter-action@v1
         with:
-          flutter-version: '3.3.3'
           channel: stable
-      - run: |
-          flutter pub get
-          flutter analyze
-          flutter test
+      - run: flutter pub get
+      - run: flutter analyze
+      - run: flutter test
   build:
     name: Build ${{ matrix.target }}
     runs-on: ${{ matrix.target }}-latest
@@ -30,7 +28,6 @@ jobs:
       - uses: actions/checkout@v2
       - uses: subosito/flutter-action@v1
         with:
-          flutter-version: '3.3.3'
           channel: stable
       - run: flutter config --enable-${{ matrix.target }}-desktop
       - run: flutter doctor -v
