@@ -32,8 +32,7 @@ jobs:
         with:
           flutter-version: '3.3.3'
           channel: stable
-      - run: flutter config --enable-macos-desktop
-      - run: flutter config --enable-windows-desktop
+      - run: flutter config --enable-${{ matrix.target }}-desktop
       - run: flutter doctor -v
       - run: flutter pub get
       - run: flutter clean
