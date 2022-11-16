@@ -2,7 +2,7 @@ name: Investment App CI/CD
 on:
   push:
     branches:
-      - main
+      - master
 jobs:
   flutter_test:
     name: Run FLutter test and analyze codebase
