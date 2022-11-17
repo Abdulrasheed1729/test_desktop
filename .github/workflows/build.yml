@@ -1,0 +1,21 @@
+name: Investment App CD
+on:
+  pull_request:
+    branches:
+      - master
+jobs:
+  build:
+    name: Build ${{ matrix.target }}
+    runs-on: ${{ matrix.target }}-latest
+    strategy:
+      matrix:
+        target: [windows, macos]
+    steps:
+      - uses: actions/checkout@v2
+      - uses: subosito/flutter-action@v1
+          channel: stable
+      - run: flutter config --enable-${{ matrix.target }}-desktop
+      - run: flutter doctor -v
+      - run: flutter pub get
+      - run: flutter clean
+      - run: flutter build ${{ matrix.target }}
